@@ -17,7 +17,7 @@ export const generateIndexFile = (storeName, baseDir, collections, authCollectio
 
     // Generate imports for collection-specific actions
     const actionImports = collections.map(col =>
-      `import { useFirestoreCollectionActions as use${capitalize(col)}Actions } from './actions/${col}.js';`
+      `import { use${capitalize(col)}Actions } from './actions/${col}.js';`
     ).join('\n');
 
     // Generate auth imports with all necessary Firebase Auth functions
@@ -528,7 +528,7 @@ import { auth } from '@/firebase'; // Assumed to be your initialized Firebase Au
 import { ref } from 'vue'; // New: Import ref for internal state management
 import use${pascalStoreName}State from './state.js'; // Assuming this defines initial reactive state
 ${authImports}
-import { useFirestoreCollectionActions } from '@/utils/useFirestoreCollectionActions'; // Import the main Firestore utility
+import { useFirestoreCollectionActions } from './useFirestoreCollectionActions'; // Import the main Firestore utility
 ${actionImports}
 
 /**
@@ -548,10 +548,6 @@ ${actionImports}
 export const use${pascalStoreName} = defineStore('${storeName}', () => {
   // Use the state defined in a separate file (e.g., src/stores/state.js)
   const state = use${pascalStoreName}State();
-
-  // Internal state for managing auth listener unsubscribe
-  const _authListenerUnsubscribe = ref(null);
-  state._authListenerUnsubscribe = _authListenerUnsubscribe; // Expose to state for fetchUser to manage
 
   // Initialize all collection-specific actions
   ${actionInits}

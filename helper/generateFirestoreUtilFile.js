@@ -495,9 +495,9 @@ export function useFirestoreCollectionActions(collectionName, state) {
             {
               type: \`\${collectionName.toUpperCase()}_CREATED\`, // e.g., 'PRODUCTS_CREATED', 'USERS_CREATED'
               description: \`\${actorName} created a new \${collectionName} document.\`,
-              targetId: docRef.id,
+              targetId: d.value?.id,
               targetType: collectionName,
-              targetName: data.name || data.title || docRef.id, // Try to get a meaningful name
+              targetName: data.name || data.title || d.value?.id, // Try to get a meaningful name
               actorId, actorEmail, actorName, actorType, isAdminAction,
               // ipAddress: 'YOUR_IP_ADDRESS_HERE' // Add if you can get it from request context
             },

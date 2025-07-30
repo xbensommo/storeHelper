@@ -1,9 +1,9 @@
 {
-  "name": "create-store-helper",
-  "version": "1.2.0",
+  "name": "create-fbase_store",
+  "version": "1.12.0",
   "type": "module",
   "bin": {
-    "create-store-helper": "./index.js"
+    "create-fbase_store": "./index.js"
   },
   "dependencies": {
     "url": "^0.11.4"
